@@ -19,16 +19,16 @@
         <div class="row">
             <!--Seccion de ingreso de datos-->
             <div class="col s12 m5">
-                <form >
+                <form id="formTask" >
                     <div class="input-field">
                         <i class="material-icons prefix">event</i>
-                        <input id="icon_prefix" type="text" class="validate">
+                        <input id="titleEvent" type="text" class="validate">
                         <label for="icon_prefix">Titulo de la tarea</label>
                     </div>
 
                     <div class="input-field">
                         <i class="material-icons prefix">insert_comment</i>
-                        <textarea id="textarea1" class="materialize-textarea"></textarea>
+                        <textarea id='descriptionEvent' class="materialize-textarea"></textarea>
                         <label for="textarea1">Descripcion tarea</label>
                     </div>
                     <button class="btn waves-effect waves-light btn-listar" type="submit" name="action">Agregar
@@ -50,5 +50,6 @@
     <!--Import jQuery before materialize.js-->
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="js/materialize.min.js"></script>
+    <script src="js/app.js"></script>
   </body>
 </html>
