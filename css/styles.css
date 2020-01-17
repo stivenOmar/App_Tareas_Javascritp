@@ -19,3 +19,16 @@
     bottom: 0;
     z-index: 100;
 }
+
+.sectionForm{
+    margin-right: 50px;
+}
+
+.titleCard{
+    display: inline-block;
+    color: #FFA518;
+}
+
+.sectionTasks{
+    margin-bottom: 200px;
+}
