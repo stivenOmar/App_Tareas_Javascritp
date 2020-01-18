@@ -5,10 +5,11 @@ let sectionTasks;
 form = document.getElementById('formTask');
 sectionTasks = document.getElementById('tasks')
 
+loadTask();
 form.addEventListener('submit',getDatesOfForm);
 sectionTasks.addEventListener('click',deleteTask)
 
-window.addEventListener('DOMContentLoaded',getTaskArrayOfLocalStorage)
+window.addEventListener('DOMContentLoaded',getTaskArrayOfLocalStorage);
 
 function getDatesOfForm(event){
     event.preventDefault();
@@ -38,7 +39,7 @@ function addTask(Task){
     arrayOfLocalStorage.push(Task);
     drawTask(Task.title, Task.description);
     localStorage.setItem('tasks',JSON.stringify(arrayOfLocalStorage));
-
+    form.reset();
 }
 
 function drawTask(title,description){
@@ -46,7 +47,6 @@ function drawTask(title,description){
     let card;
     card = document.createElement('div');
     card.setAttribute('class','card horizontal');
-
     card.innerHTML = `
     <div class="card-stacked">
         <div class="card-action ">
@@ -95,7 +95,11 @@ function getTaskArrayOfLocalStorage(){
     }else {
         tasks = JSON.parse(localStorage.getItem('tasks'));
     }
-    
-
     return tasks;
+}
+
+function loadTask(){
+    for (const task of getTaskArrayOfLocalStorage()) {
+        drawTask(task.title,task.description);
+    }
 }
