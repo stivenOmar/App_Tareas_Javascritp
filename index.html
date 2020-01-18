@@ -30,7 +30,7 @@
 
                     <div class="input-field">
                         <i class="material-icons prefix">insert_comment</i>
-                        <textarea id='descriptionEvent' class="materialize-textarea"></textarea>
+                        <textarea id='descriptionEvent' class="materialize-textarea" ></textarea>
                         <label for="textarea1">Descripcion tarea</label>
                     </div>
                     <button class="btn waves-effect waves-light btn-listar" type="submit" name="action">Agregar
@@ -42,6 +42,15 @@
                 <div id="tasks">
                     <!--aqui va las cards de tareas generadas
                     mediante javascript-->
+
+                    <ul class="collapsible">
+                        <li>
+                          <div class="collapsible-header">
+                            <i class="material-icons">view_list</i>
+                            Tareas Pendientes
+                            <span class="new badge" id="counterTask"></span></div>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>

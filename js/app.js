@@ -2,20 +2,22 @@ let form;
 let titleTask;
 let descriptionEvent;
 let sectionTasks;
+let counterTask;
 form = document.getElementById('formTask');
-sectionTasks = document.getElementById('tasks')
+sectionTasks = document.getElementById('tasks');
+counterTask = document.getElementById('counterTask')
 
 loadTask();
 form.addEventListener('submit',getDatesOfForm);
-sectionTasks.addEventListener('click',deleteTask)
+sectionTasks.addEventListener('click',deleteTask);
 
 window.addEventListener('DOMContentLoaded',getTaskArrayOfLocalStorage);
+
 
 function getDatesOfForm(event){
     event.preventDefault();
     titleTask = form.querySelector('#titleEvent').value;
     descriptionEvent = form.querySelector('#descriptionEvent').value;
-    
     generateObjectTask(titleTask,descriptionEvent);
 }
 
@@ -39,6 +41,7 @@ function addTask(Task){
     arrayOfLocalStorage.push(Task);
     drawTask(Task.title, Task.description);
     localStorage.setItem('tasks',JSON.stringify(arrayOfLocalStorage));
+    fCounterTask();
     form.reset();
 }
 
@@ -86,6 +89,7 @@ function deleteInArrayLocalStorage(titleDelete,descriptionDelete){
         }
     }
     localStorage.setItem('tasks', JSON.stringify(arrayOfLocalStorage));
+    fCounterTask();
 }
 
 function getTaskArrayOfLocalStorage(){
@@ -95,6 +99,7 @@ function getTaskArrayOfLocalStorage(){
     }else {
         tasks = JSON.parse(localStorage.getItem('tasks'));
     }
+
     return tasks;
 }
 
@@ -102,4 +107,12 @@ function loadTask(){
     for (const task of getTaskArrayOfLocalStorage()) {
         drawTask(task.title,task.description);
     }
+    fCounterTask();
+}
+
+//For count the task existentes
+function fCounterTask(){
+    let cantTask;
+    cantTask = getTaskArrayOfLocalStorage();
+    counterTask.textContent = cantTask.length;
 }
