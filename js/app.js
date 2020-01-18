@@ -36,12 +36,12 @@ function addTask(Task){
 
     arrayOfLocalStorage = getTaskArrayOfLocalStorage();
     arrayOfLocalStorage.push(Task);
-    drawTask(Task);
+    drawTask(Task.title, Task.description);
     localStorage.setItem('tasks',JSON.stringify(arrayOfLocalStorage));
 
 }
 
-function drawTask(objectTask){
+function drawTask(title,description){
 
     let card;
     card = document.createElement('div');
@@ -50,13 +50,13 @@ function drawTask(objectTask){
     card.innerHTML = `
     <div class="card-stacked">
         <div class="card-action ">
-            <h6 class="titleCard">${objectTask.title}</h6>
+            <h6 class="titleCard">${title}</h6>
             <a class="waves-effect waves-light pink darken-1 btn right btnDeleteTask"><i
                     class="material-icons">delete_forever</i></a>
         </div>
         <div class="divider"></div>
         <div class="card-content">
-            <p>${objectTask.description}</p>
+            <p>${description}</p>
         </div>
     </div>
     `
@@ -65,11 +65,27 @@ function drawTask(objectTask){
 }
 
 function deleteTask(event){
-    
+    let titleDelete;
+    let descriptionDelete;
     if(event.target.classList.contains('btnDeleteTask')){
-        console.log(event.target.parentElement.parentElement.parentElement.remove());
+        event.target.parentElement.parentElement.parentElement.remove();
+       titleDelete = event.target.parentElement.children[0].textContent
+       descriptionDelete = event.target.parentElement.parentElement.querySelector('.card-content p').textContent;
+       deleteInArrayLocalStorage(titleDelete,descriptionDelete);
     }
 
+}
+
+function deleteInArrayLocalStorage(titleDelete,descriptionDelete){
+    let arrayOfLocalStorage = getTaskArrayOfLocalStorage();
+    let indice;
+    for (const object of arrayOfLocalStorage) {
+        if(object.title == titleDelete && object.description == descriptionDelete){
+           indice =  arrayOfLocalStorage.indexOf(object);
+           arrayOfLocalStorage.splice(indice,1);
+        }
+    }
+    localStorage.setItem('tasks', JSON.stringify(arrayOfLocalStorage));
 }
 
 function getTaskArrayOfLocalStorage(){
@@ -79,5 +95,7 @@ function getTaskArrayOfLocalStorage(){
     }else {
         tasks = JSON.parse(localStorage.getItem('tasks'));
     }
+    
+
     return tasks;
 }
