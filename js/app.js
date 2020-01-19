@@ -6,6 +6,8 @@ let counterTask;
 form = document.getElementById('formTask');
 sectionTasks = document.getElementById('tasks');
 counterTask = document.getElementById('counterTask')
+titleTask = form.querySelector('#titleEvent');
+descriptionEvent = form.querySelector('#descriptionEvent');
 
 loadTask();
 form.addEventListener('submit',getDatesOfForm);
@@ -16,9 +18,7 @@ window.addEventListener('DOMContentLoaded',getTaskArrayOfLocalStorage);
 
 function getDatesOfForm(event){
     event.preventDefault();
-    titleTask = form.querySelector('#titleEvent').value;
-    descriptionEvent = form.querySelector('#descriptionEvent').value;
-    generateObjectTask(titleTask,descriptionEvent);
+    generateObjectTask(titleTask.value,descriptionEvent.value);
 }
 
 function generateObjectTask(titleTask,descriptionEvent){
@@ -34,15 +34,17 @@ function generateObjectTask(titleTask,descriptionEvent){
 
 
 function addTask(Task){
-
-    let arrayOfLocalStorage;
-
-    arrayOfLocalStorage = getTaskArrayOfLocalStorage();
-    arrayOfLocalStorage.push(Task);
-    drawTask(Task.title, Task.description);
-    localStorage.setItem('tasks',JSON.stringify(arrayOfLocalStorage));
-    fCounterTask();
-    form.reset();
+    if(Task.title == '' || Task.description){
+        alert('Debes completar al menos uno de los dos campos');
+    }else{
+        let arrayOfLocalStorage;
+        arrayOfLocalStorage = getTaskArrayOfLocalStorage();
+        arrayOfLocalStorage.push(Task);
+        drawTask(Task.title, Task.description);
+        localStorage.setItem('tasks', JSON.stringify(arrayOfLocalStorage));
+        fCounterTask();
+        form.reset();
+    }
 }
 
 function drawTask(title,description){
@@ -115,4 +117,5 @@ function fCounterTask(){
     let cantTask;
     cantTask = getTaskArrayOfLocalStorage();
     counterTask.textContent = cantTask.length;
+    console.log(cantTask);
 }
