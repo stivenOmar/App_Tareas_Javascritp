@@ -34,7 +34,7 @@ function generateObjectTask(titleTask,descriptionEvent){
 
 
 function addTask(Task){
-    if(Task.title == '' || Task.description){
+    if(Task.title == '' && Task.description == ''){
         alert('Debes completar al menos uno de los dos campos');
     }else{
         let arrayOfLocalStorage;
